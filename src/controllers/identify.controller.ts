@@ -1,20 +1,21 @@
-import { Request, Response } from "express"
-import { ContactService } from "../services/contact.service"
 
-export const identifyController = async (req: Request, res: Response) => {
+import { Request, Response } from "express"
+import { ContactService } from "../services/contact.service.js"
+
+export const identifyController = async (req: Request, res: Response): Promise<void> => {
   const { email, phoneNumber } = req.body
+  const contactService = new ContactService()
 
   if (!email && !phoneNumber) {
-    return res.status(400).json({ error: "Either email or phoneNumber must be provided" })
+    res.status(400).json({ error: "Either email or phoneNumber must be provided" })
+    return
   }
-
-  const contactService = new ContactService()
 
   const existingContacts = await contactService.findContactsByEmailOrPhone(email, phoneNumber)
 
   if (existingContacts.length === 0) {
     const newContact = await contactService.createContact(email, phoneNumber, undefined, "primary")
-    return res.json({
+    res.json({
       contact: {
         primaryContatctId: newContact.id,
         emails: newContact.email ? [newContact.email] : [],
@@ -22,6 +23,7 @@ export const identifyController = async (req: Request, res: Response) => {
         secondaryContactIds: [],
       },
     })
+    return
   }
 
   const allLinked = await contactService.findAllLinkedContacts(existingContacts.map(c => c.id))
@@ -55,7 +57,7 @@ export const identifyController = async (req: Request, res: Response) => {
   }
 
   const consolidated = contactService.consolidateContacts(allLinked)
-  return res.json({
+  res.json({
     contact: {
       primaryContatctId: consolidated.primaryContactId,
       emails: consolidated.emails,

@@ -1,5 +1,5 @@
-import { sql } from "../database"
-import { Contact, ConsolidatedContact } from "../models/contact.model"
+import { sql } from "../database/index.js"
+import { Contact, ConsolidatedContact } from "../models/contact.model.js"
 
 export class ContactService {
   async findContactsByEmailOrPhone(email?: string, phoneNumber?: string): Promise<Contact[]> {
