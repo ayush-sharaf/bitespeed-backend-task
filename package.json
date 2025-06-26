@@ -1,0 +1,33 @@
+{
+  "name": "bitespeed-task",
+  "version": "1.0.0",
+  "description": "This is a Node.js + TypeScript API that identifies and consolidates customer contact information (email and phone number) across multiple entries, similar to Bitespeed's `/identify` service.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayush-sharaf/bitespeed-backend-task.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ayush-sharaf/bitespeed-backend-task/issues"
+  },
+  "homepage": "https://github.com/ayush-sharaf/bitespeed-backend-task#readme",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.1",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
