@@ -14,7 +14,7 @@ This is a Node.js + TypeScript API that identifies and consolidates customer con
 
 ## 🧾 API Specification
 
-### POST `/api/identify`
+### POST `/identify`
 
 #### Request Body
 
@@ -90,7 +90,7 @@ PORT=3000
 npm run dev
 ```
 
-Server runs at: `http://localhost:3000/api/identify`
+Server runs at: `http://localhost:3000/identify`
 
 ---
 
@@ -116,7 +116,7 @@ CREATE TABLE "Contact" (
 You can use Postman or curl:
 
 ```bash
-curl -X POST http://localhost:3000/api/identify \
+curl -X POST http://localhost:3000/identify \
   -H "Content-Type: application/json" \
   -d '{"email":"foo@example.com", "phoneNumber":"1234567890"}'
 ```
@@ -130,5 +130,69 @@ curl -X POST http://localhost:3000/api/identify \
 - Express
 - NeonDB (PostgreSQL)
 - dotenv
+
+---
+
+## Deployed API Endpoint
+
+The API is live at:
+
+**POST** `https://bitespeed-backend-task-g3l6.onrender.com/identify`
+
+### Example Usage (with Postman or curl)
+
+#### Request
+
+- **Method:** POST
+- **URL:** https://bitespeed-backend-task-g3l6.onrender.com/identify
+- **Headers:**
+  - Content-Type: application/json
+- **Body (JSON):**
+  ```json
+  {
+    "email": "user@example.com",
+    "phoneNumber": "123456"
+  }
+  ```
+  (You can provide either or both fields.)
+
+#### Response
+
+- **Success:**
+  ```json
+  {
+    "contact": {
+      "primaryContatctId": 1,
+      "emails": ["user@example.com"],
+      "phoneNumbers": ["123456"],
+      "secondaryContactIds": []
+    }
+  }
+  ```
+- **Error (missing fields):**
+  ```json
+  {
+    "error": "Either email or phoneNumber must be provided"
+  }
+  ```
+
+## Local Development
+
+1. Clone the repo and install dependencies:
+   ```sh
+   git clone <repo-url>
+   cd bitespeed-task
+   npm install
+   ```
+2. Set up your `.env` file with the required environment variables (see `.env.example` if present).
+3. Build and run:
+   ```sh
+   npm run build
+   npm start
+   ```
+
+## Deployment
+
+This project is deployed on [Render](https://render.com/). See the code and scripts for deployment details.
 
 ---
